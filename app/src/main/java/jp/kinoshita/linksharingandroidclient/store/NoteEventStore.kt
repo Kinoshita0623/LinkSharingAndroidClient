@@ -7,6 +7,11 @@ import jp.kinoshita.linksharingandroidclient.model.notes.Note
 import jp.kinoshita.linksharingandroidclient.util.FIFOMap
 import java.util.*
 
+/**
+ * 画面間でのNoteイベントの共有を想定して作成した。
+ * 追加された削除されたといった単純なイベントを管理する
+ * またイベントを集合としてメモリ上にFIFO方式でキャッシュしている。
+ */
 class NoteEventStore {
 
     sealed class Event(open val eventAt: Date, open val noteId: Long){
