@@ -4,9 +4,13 @@ import io.reactivex.Single
 import jp.kinoshita.linksharingandroidclient.model.comments.Comment
 import jp.kinoshita.linksharingandroidapp.model.comments.CreateComment
 import jp.kinoshita.linksharingandroidclient.model.favorites.Favorite
+import jp.kinoshita.linksharingandroidclient.model.login.Login
+import jp.kinoshita.linksharingandroidclient.model.login.Token
 import jp.kinoshita.linksharingandroidclient.model.notes.CreateNote
 import jp.kinoshita.linksharingandroidclient.model.notes.IsFavorite
 import jp.kinoshita.linksharingandroidclient.model.notes.Note
+import jp.kinoshita.linksharingandroidclient.model.register.CreateUser
+import jp.kinoshita.linksharingandroidclient.model.register.CreatedUser
 import jp.kinoshita.linksharingandroidclient.model.users.User
 import retrofit2.Response
 import retrofit2.http.*
@@ -46,6 +50,10 @@ interface LinkSharingAPI {
     @GET("notes/{noteId}/comments/{commentId}")
     fun findComments(@Path("noteId") noteId: Long, @Path("commentId") commentId: Long, @Query("page") page: Int): Single<Response<Page<Comment>>>
 
+    @POST("register")
+    fun register(@Body createUser: CreateUser): Single<Response<CreatedUser>>
 
+    @POST("login")
+    fun login(@Body login: Login): Single<Response<Token>>
 
 }
