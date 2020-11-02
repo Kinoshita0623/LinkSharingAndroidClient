@@ -12,6 +12,6 @@ data class CreateUser(
     @SerializedName("password_confirmation")
     val passwordConfirmation: String,
 
-    @SerializedName("user_name")
+    @SerializedName("device_name")
     val deviceName: String
 )
