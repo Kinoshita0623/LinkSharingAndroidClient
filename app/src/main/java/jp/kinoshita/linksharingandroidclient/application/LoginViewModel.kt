@@ -13,14 +13,15 @@ import jp.kinoshita.linksharingandroidclient.model.login.Token
 import jp.kinoshita.linksharingandroidclient.model.users.User
 
 class LoginViewModel(
-    val api: LinkSharingAPI
+    private val api: LinkSharingAPI,
+    private val deviceName: String = "LinkSharing4Android"
+
 ) : ViewModel() {
 
     val email = MutableLiveData<String>()
 
     val password = MutableLiveData<String>()
 
-    var deviceName = "LinkSharing4Android"
 
 
     private val mIsLoading = MutableLiveData<Boolean>()
