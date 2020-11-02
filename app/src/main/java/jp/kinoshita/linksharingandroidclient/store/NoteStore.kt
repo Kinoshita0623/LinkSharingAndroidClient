@@ -4,14 +4,13 @@ import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject
-import jp.kinoshita.linksharingandroidclient.model.AuthRequiredLinkSharingAPI
-import jp.kinoshita.linksharingandroidclient.model.LinkSharingAPI
+import jp.kinoshita.linksharingandroidclient.model.API
 import jp.kinoshita.linksharingandroidclient.model.notes.Note
 import java.util.concurrent.ConcurrentHashMap
 
 
 class NoteStore(
-    val api: AuthRequiredLinkSharingAPI
+    val api: API
 ) {
 
     private val notes = ConcurrentHashMap<Long, Note>()

@@ -4,14 +4,18 @@ import io.reactivex.Single
 import jp.kinoshita.linksharingandroidapp.model.comments.CreateComment
 import jp.kinoshita.linksharingandroidclient.model.comments.Comment
 import jp.kinoshita.linksharingandroidclient.model.favorites.Favorite
+import jp.kinoshita.linksharingandroidclient.model.login.Login
+import jp.kinoshita.linksharingandroidclient.model.login.Token
 import jp.kinoshita.linksharingandroidclient.model.notes.CreateNote
 import jp.kinoshita.linksharingandroidclient.model.notes.IsFavorite
 import jp.kinoshita.linksharingandroidclient.model.notes.Note
+import jp.kinoshita.linksharingandroidclient.model.register.CreateUser
+import jp.kinoshita.linksharingandroidclient.model.register.CreatedUser
 import jp.kinoshita.linksharingandroidclient.model.users.User
 import retrofit2.Response
 import retrofit2.http.*
 
-interface AuthRequiredLinkSharingAPI : LinkSharingAPI{
+interface API{
 
     @GET("me")
     fun me(): Single<User>
@@ -59,34 +63,43 @@ interface AuthRequiredLinkSharingAPI : LinkSharingAPI{
 
 
     @GET("notes/{noteId}")
-    override fun getNote(@Path("noteId") noteId: Long): Single<Response<Note>>
+    fun getNote(@Path("noteId") noteId: Long): Single<Response<Note>>
 
     @GET("users/{userId}/notes")
-    override fun getUserNotes(@Path("userId") userId: Long, @Query("page") page: Int): Single<Response<Page<Note>>>
+    fun getUserNotes(@Path("userId") userId: Long, @Query("page") page: Int): Single<Response<Page<Note>>>
 
     @GET("users/{userId}/favorites")
-    override fun favoriteNotes(@Path("userId") userId: Long, @Query("page") page: Int): Single<Response<Page<Note>>>
+    fun favoriteNotes(@Path("userId") userId: Long, @Query("page") page: Int): Single<Response<Page<Note>>>
 
     @GET("users/{userId}/followers")
-    override fun followers(@Path("userId") userId: Long, @Query("page") page: Int): Single<Response<Page<User>>>
+    fun followers(@Path("userId") userId: Long, @Query("page") page: Int): Single<Response<Page<User>>>
 
     @GET("users/{userId}/followings")
-    override fun followings(@Path("userId") userId: Long, @Query("page") page: Int): Single<Response<Page<User>>>
+    fun followings(@Path("userId") userId: Long, @Query("page") page: Int): Single<Response<Page<User>>>
 
     @GET("tags")
-    override fun searchTag(@Query("name") name: String): Single<Response<Page<Tag>>>
+    fun searchTag(@Query("name") name: String): Single<Response<Page<Tag>>>
 
     @POST("notes/search-by-tag")
-    override fun searchByTag(@Body conditions: List<List<String>>, @Query("page") page: Int): Single<Response<Page<Note>>>
+    fun searchByTag(@Body conditions: List<List<String>>, @Query("page") page: Int): Single<Response<Page<Note>>>
 
     @GET("notes/{noteId}/favorites")
-    override fun favoriteUsers(@Path("noteId") noteId: Long, @Query("page") page: Int): Single<Response<Page<User>>>
+    fun favoriteUsers(@Path("noteId") noteId: Long, @Query("page") page: Int): Single<Response<Page<User>>>
 
     @GET("notes/{noteId}/comments")
-    override fun findComments(@Path("noteId") noteId: Long, @Query("page") page: Int): Single<Response<Page<Comment>>>
+    fun findComments(@Path("noteId") noteId: Long, @Query("page") page: Int): Single<Response<Page<Comment>>>
 
     @GET("notes/{noteId}/comments/{commentId}")
-    override fun findComments(@Path("noteId") noteId: Long, @Path("commentId") commentId: Long, @Query("page") page: Int): Single<Response<Page<Comment>>>
+    fun findComments(@Path("noteId") noteId: Long, @Path("commentId") commentId: Long, @Query("page") page: Int): Single<Response<Page<Comment>>>
+
+
+
+    @POST("register")
+    fun register(@Body createUser: CreateUser): Single<Response<CreatedUser>>
+
+    @POST("login")
+    fun login(@Body login: Login): Single<Response<Token>>
+
 
 
 

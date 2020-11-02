@@ -1,7 +1,6 @@
 package jp.kinoshita.linksharingandroidclient.model
 
 import com.google.gson.Gson
-import jp.kinoshita.linksharingandroidclient.model.Account
 import jp.kinoshita.linksharingandroidclient.util.GsonFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -15,7 +14,7 @@ class APIFactory(
     //val emitter: Subscriber<ConnectionConfig>
 ) {
 
-    fun create(): LinkSharingAPI{
+    fun create(): API{
         val builder = OkHttpClient.Builder()
 
         if(account != null){
@@ -37,11 +36,8 @@ class APIFactory(
             .client(okHttpClient)
             .build()
 
-        return if(account == null){
-            retrofit.create(LinkSharingAPI::class.java)
-        }else{
-            retrofit.create(AuthRequiredLinkSharingAPI::class.java)
-        }
+        return retrofit.create(API::class.java)
+
     }
 
 }
