@@ -80,25 +80,40 @@
 
                 />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tags_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/summary_view"
+                tools:listitem="@layout/item_tag"
+                tools:itemCount="1"
+                />
+
             <ImageButton
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:id="@+id/note_reply_button"
-                android:src="@drawable/ic_reply_black_24dp"
-                app:layout_constraintTop_toBottomOf="@id/summary_view"
+                android:src="@drawable/ic_reply_tint_24dp"
+                app:layout_constraintTop_toBottomOf="@id/tags_view"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="ContentDescription" />
+                tools:ignore="ContentDescription"
+                android:tint="@color/colorIconTint"
+                />
             <ImageButton
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:id="@+id/note_favorite_button"
                 android:src="@drawable/ic_star_border_black_24dp"
-                app:layout_constraintTop_toBottomOf="@id/summary_view"
+                app:layout_constraintTop_toBottomOf="@id/tags_view"
                 app:layout_constraintStart_toEndOf="@id/note_reply_button"
                 android:layout_marginStart="8dp"
-                tools:ignore="ContentDescription" />
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/ic_star_yellow_24dp"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
