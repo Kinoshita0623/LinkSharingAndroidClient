@@ -29,7 +29,7 @@ class LoginViewModel(
     private val mCompositeDisposable = CompositeDisposable()
 
     private val mLoggedInTokenSubject = PublishSubject.create<Token>()
-    private val loggedInToken: Observable<Token> = mLoggedInTokenSubject
+    val loggedInToken: Observable<Token> = mLoggedInTokenSubject
 
 
 
