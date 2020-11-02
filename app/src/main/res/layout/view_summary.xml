@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="summary"
+            type="jp.kinoshita.linksharingandroidclient.model.notes.Summary" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp">
+
+        <ImageView
+            android:id="@+id/summary_thumbnail"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="4dp"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/summary_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/summary_thumbnail"
+            android:singleLine="true"
+            tools:text="hogehogehoge title"
+            android:textStyle="bold"
+            android:ellipsize="end"
+            android:text="@{ summary.title }"
+            android:visibility="@{ summary.title == null || summary.title.empty ? View.GONE : View.VISIBLE }"
+            />
+
+        <TextView
+            android:id="@+id/summary_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:layout_below="@id/summary_title"
+            tools:text="description"
+            android:layout_toEndOf="@id/summary_thumbnail"
+            android:text="@{ summary.description == null || summary.description ? View.GONE : View.VISIBLE }"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_toEndOf="@id/summary_thumbnail"
+            android:layout_below="@id/summary_description"
+            android:layout_marginTop="4dp"
+            tools:text="https://hogehogepiyopioy.jp/"
+            android:text="@{ summary.url }"
+
+            />
+
+
+    </RelativeLayout>
+</layout>
