@@ -20,7 +20,7 @@ interface AuthRequiredLinkSharingAPI : LinkSharingAPI{
     fun createNote(@Body createNote: CreateNote): Single<Response<Note>>
 
     @GET("notes")
-    fun timeline(@Query("page") page: Int): Single<Page<Note>>
+    fun timeline(@Query("page") page: Int): Single<Response<Page<Note>>>
 
     @DELETE("notes/{noteId}")
     fun deleteNote(@Path("noteId") noteId: Long): Single<Response<Unit>>
