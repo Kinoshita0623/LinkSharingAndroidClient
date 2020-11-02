@@ -1,14 +1,21 @@
 package jp.kinoshita.linksharingandroidclient.ui.notes
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.flexbox.*
+import jp.kinoshita.linksharingandroidclient.R
 import jp.kinoshita.linksharingandroidclient.databinding.ItemNoteBinding
 import jp.kinoshita.linksharingandroidclient.model.notes.Note
+import jp.kinoshita.linksharingandroidclient.ui.tags.TagListAdapter
 
-class NoteListAdapter : ListAdapter<Note, NoteListAdapter.ViewHolder>(ItemDiffUtil){
+class NoteListAdapter(
+    val lifecycleOwner: LifecycleOwner
+) : ListAdapter<Note, NoteListAdapter.ViewHolder>(ItemDiffUtil){
 
     class ViewHolder(
         private val itemNoteBinding: ItemNoteBinding,
@@ -18,7 +25,22 @@ class NoteListAdapter : ListAdapter<Note, NoteListAdapter.ViewHolder>(ItemDiffUt
             itemNoteBinding.lifecycleOwner = lifecycleOwner
             itemNoteBinding.note = note
 
+            val tagLayoutManager = createLayoutManager()
+            itemNoteBinding.tagsView.layoutManager = tagLayoutManager
+            val adapter = TagListAdapter()
+            adapter.submitList(note.tags)
+            itemNoteBinding.tagsView.adapter = adapter
             itemNoteBinding.executePendingBindings()
+        }
+
+        private fun createLayoutManager(): RecyclerView.LayoutManager{
+
+            val flexBoxLayoutManager = FlexboxLayoutManager(itemNoteBinding.root.context)
+            flexBoxLayoutManager.flexDirection = FlexDirection.ROW
+            flexBoxLayoutManager.flexWrap = FlexWrap.WRAP
+            flexBoxLayoutManager.justifyContent = JustifyContent.FLEX_START
+            flexBoxLayoutManager.alignItems = AlignItems.STRETCH
+            return flexBoxLayoutManager
         }
     }
 
@@ -33,10 +55,12 @@ class NoteListAdapter : ListAdapter<Note, NoteListAdapter.ViewHolder>(ItemDiffUt
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.onBind(getItem(position))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("Not yet implemented")
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = DataBindingUtil.inflate<ItemNoteBinding>(inflater, R.layout.item_note, parent, false)
+        return ViewHolder(binding, lifecycleOwner)
     }
 }
