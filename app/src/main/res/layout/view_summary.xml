@@ -43,7 +43,8 @@
             android:layout_below="@id/summary_title"
             tools:text="description"
             android:layout_toEndOf="@id/summary_thumbnail"
-            android:text="@{ summary.description == null || summary.description ? View.GONE : View.VISIBLE }"
+            android:visibility="@{ summary.description == null || summary.description.empty ? View.GONE : View.VISIBLE }"
+            android:text="@{ summary.description }"
             />
 
         <TextView
