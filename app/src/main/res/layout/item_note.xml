@@ -1,46 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:paddingStart="8dp"
-    android:paddingEnd="8dp"
-    android:paddingTop="4dp"
-    android:paddingBottom="4dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/user_avatar_icon"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        tools:src="@drawable/ic_launcher_background"
-        />
-    <TextView
-        android:id="@+id/user_name"
-        android:layout_width="0dp"
+    <data>
+        <variable
+            name="note"
+            type="jp.kinoshita.linksharingandroidclient.model.notes.Note" />
+    </data>
+    <androidx.cardview.widget.CardView
+
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/user_avatar_icon"
-        app:layout_constraintTop_toTopOf="@id/user_avatar_icon"
-        app:layout_constraintBottom_toBottomOf="@id/user_avatar_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="4dp"
-        app:layout_constraintHorizontal_weight="@id/user_avatar_icon"
-        tools:text="userName"
-        android:singleLine="true"/>
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        app:layout_constraintTop_toBottomOf="@id/user_avatar_icon"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@android:color/darker_gray"
+        app:contentPaddingLeft="8dp"
+        app:contentPaddingRight="8dp"
+        app:contentPaddingTop="4dp"
+        app:contentPaddingBottom="4dp"
+        app:cardCornerRadius="8dp"
         android:layout_marginTop="4dp"
-        />
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            >
+
+            <ImageView
+                android:id="@+id/user_avatar_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:src="@drawable/ic_launcher_background"
+                />
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/user_avatar_icon"
+                app:layout_constraintTop_toTopOf="@id/user_avatar_icon"
+                app:layout_constraintBottom_toBottomOf="@id/user_avatar_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="4dp"
+                app:layout_constraintHorizontal_weight="@id/user_avatar_icon"
+                tools:text="userName"
+                android:singleLine="true"
+                android:text="@{ note.author.userName }"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toBottomOf="@id/user_avatar_icon"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@android:color/darker_gray"
+                android:layout_marginTop="4dp"
+                android:id="@+id/partition_line"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/partition_line"
+                tools:text="本文ほげほげほげほげほえげぴよおおおおおおおDockerどっかーん"
+                android:layout_marginTop="4dp"
+                android:id="@+id/note_text"
+                android:text="@{ note.text }"
+                />
+
+            <include
+                layout="@layout/view_summary"
+                app:layout_constraintTop_toBottomOf="@id/note_text"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:summary="@{note.summary}"
+                android:id="@+id/summary_view"
+
+                />
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

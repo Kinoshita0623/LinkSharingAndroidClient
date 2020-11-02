@@ -18,7 +18,8 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginEnd="4dp"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"
+            android:src="@drawable/ic_link_black_24dp"/>
 
         <TextView
             android:id="@+id/summary_title"
