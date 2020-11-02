@@ -22,10 +22,10 @@ class TimelineViewModel(
         fun onLoadNext(pageNumber: Int): Single<Response<Page<Note>>>
     }
 
-    val notesLiveData = MutableLiveData<List<Note>>()
+    private val notesLiveData = MutableLiveData<List<Note>>()
     val notes: LiveData<List<Note>> = notesLiveData
 
-    val mIsLoadingLiveData = MutableLiveData<Boolean>(false)
+    private val mIsLoadingLiveData = MutableLiveData<Boolean>(false)
     val isLoading: LiveData<Boolean> = mIsLoadingLiveData
 
     private val mExceptionSubject = PublishSubject.create<Exception>()
